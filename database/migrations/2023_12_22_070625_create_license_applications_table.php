@@ -20,16 +20,16 @@ return new class extends Migration
             $table->foreignIdFor(Business::class)->constrained();
             $table->foreignIdFor(LicenseCategory::class)->constrained();
             $table->string('ProcLvl');
-            $table->string('Affidavit');
-            $table->string('Medical_Certificate');
-            $table->date('Expire_Date');
-            $table->string('License_No');
-            $table->string('QRImage');
+            $table->string('Affidavit')->nullable();
+            $table->string('Medical_Certificate')->nullable();
+            $table->date('Expire_Date')->nullable();
+            $table->string('License_No')->nullable();
+            $table->string('QRImage')->nullable();
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(District::class)->constrained();
             $table->date('Update_Date');
             $table->date('Submit_Date');
-            $table->date('Issue_Date');
+            $table->date('Issue_Date')->nullable();
             $table->timestamps();
         });
     }

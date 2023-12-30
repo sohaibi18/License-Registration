@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,8 +11,27 @@ class LicenseApplication extends Model
 {
     use HasFactory;
     protected $table = 'license_applications';
-    protected $guarded = ['*'];
+    protected $fillable = [
+      'business_id',
+        'license_category_id',
+        'ProcLvl',
+        'Affidavit',
+        'Medical_Certificate',
+        'Expire_Date',
+        'License_No',
+        'QRImage',
+        'user_id',
+        'district_id', 'Update_Date', 'Submit_Date', 'Issue_Date',
+    ];
+    public static function boot()
+    {
+        parent::boot();
 
+        self::updating(function ($model) {
+            // Set 'Update_Date' to the current timestamp when updating any field in the record
+            $model->Update_Date = Carbon::now();
+        });
+    }
     public function business():BelongsTo
     {
         return $this->belongsTo(Business::class);
@@ -19,7 +39,7 @@ class LicenseApplication extends Model
 
     public function license_category(): BelongsTo
     {
-        return $this->belongsTo(LicenseCategory::class);
+        return $this->belongsTo(LicenseCategory::class, 'license_category_id');
     }
 
     public function user(): BelongsTo
@@ -35,5 +55,10 @@ class LicenseApplication extends Model
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class);
+    }
+
+    public function licenseCategory()
+    {
+        return $this->belongsTo(LicenseCategory::class, 'license_category_id');
     }
 }

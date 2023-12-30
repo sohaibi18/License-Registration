@@ -1,7 +1,7 @@
 <ul class="menu-inner py-1">
     <!-- Dashboard -->
     <li class="menu-item active">
-        <a href="index.html" class="menu-link">
+        <a href="/dashboard" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
         </a>
@@ -25,6 +25,39 @@
             </ul>
             <!-- Display user information -->
 {{--            <p>Hello, {{ auth()->user()->name }}!</p>--}}
+        @endif
+        <ul class="menu-sub">
+            <li class="menu-item">
+                <a href="/show/submitted/applications" class="menu-link">
+                    <div data-i18n="Perfect Scrollbar">Submitted Applications</div>
+                </a>
+            </li>
+        </ul>
+
+        @if(auth()->check())
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <!-- Pass the authenticated user's ID in the URL -->
+                    <a href="/application/finance/verification/{{ auth()->id() }}" class="menu-link">
+                        <div data-i18n="Without menu">Finance Pending Applications</div>
+                    </a>
+                </li>
+            </ul>
+            <!-- Display user information -->
+            {{--            <p>Hello, {{ auth()->user()->name }}!</p>--}}
+        @endif
+
+        @if(auth()->check())
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <!-- Pass the authenticated user's ID in the URL -->
+                    <a href="/application/license/verification/{{ auth()->id() }}" class="menu-link">
+                        <div data-i18n="Without menu">License Pending Applications</div>
+                    </a>
+                </li>
+            </ul>
+            <!-- Display user information -->
+            {{--            <p>Hello, {{ auth()->user()->name }}!</p>--}}
         @endif
 
     </li>

@@ -14,12 +14,27 @@ class Business extends Model
     use HasFactory;
 
     protected $table = 'businesses';
-    protected $guarded = ['*'];
+    protected $fillable = [
+        'Business_Name',
+        'Business_Address',
+        'Contact_Number',
+        'Business_Email',
+        'Website',
+        'Start_Date',
+        'Food_Handlers',
+        'district_id', 'owner_id', 'user_id', 'business_type_id',
+    ];
 
     public function owners(): BelongsToMany
     {
-        return $this->belongsToMany(Owner::class);
+        return $this->belongsToMany(Owner::class)->withTimestamps();
     }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(Owner::class);
+    }
+
 
     public function business_type(): BelongsTo
     {
@@ -36,7 +51,7 @@ class Business extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function applications():HasMany
+    public function applications(): HasMany
     {
         return $this->hasMany(LicenseApplication::class);
     }

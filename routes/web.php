@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FinanceVerificationController;
 use App\Http\Controllers\LicenseApplicationController;
+use App\Http\Controllers\LicenseVerificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +37,28 @@ Route::group([
 ], function () {
 
     Route::get('/show/application/form/{id}', 'show')->name('show-application-form');
-    Route::post('/display/submitted/data/{id}', 'display')->name('display-submitted-data');
+    Route::post('/display/submitted/data/{id}', 'store')->name('display-submitted-data');
+    Route::get('/show/submitted/applications', 'show_applications')->name('show-submitted-applications');
+    Route::get('/attach/licensee/documents/{id}', 'attach_documents')->name('attach-documents');
+    Route::post('/licensee/payment/details/{id}', 'store_payment')->name('store-payment');
 });
 
-require __DIR__.'/auth.php';
+Route::group([
+    'controller' => FinanceVerificationController::class,
+    'middleware' => 'auth',
+], function () {
+    Route::get('/application/finance/verification/{userid}', 'display_For_Verification')->name('display_For_Verification');
+    Route::get('/show/verification/form/{userid}/license/{license_application_id}', 'show_finance_verification')->name('show_finance_verification');
+    Route::post('/verified/{userid}/licenseapp/{licenseappid}', 'finance_verified')->name('finance-verified');
+});
+
+Route::group([
+    'controller' => LicenseVerificationController::class,
+    'middleware' => 'auth',
+], function () {
+    Route::get('/application/license/verification/{userid}', 'display_For_Verification')->name('display_For_Verification');
+    Route::get('/show/license/verification/form/{userid}/license/{id}', 'show_license_verification')
+        ->name('show-license-verification');
+});
+
+require __DIR__ . '/auth.php';

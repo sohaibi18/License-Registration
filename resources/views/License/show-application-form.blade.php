@@ -235,6 +235,37 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Attach Affidavit</label>
+                        <div class="col-sm-8">
+                            <input
+                                type="file"
+                                id="basic-default-message"
+                                class="form-control"
+                                name="Affidavit"
+                                aria-describedby="basic-icon-default-message2"
+                            />
+                            @if($errors->has('Affidavit'))
+                                <span class="alert alert-danger"> {{ $errors->first('Affidavit') }}</span><br>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Attach Medical Certificate</label>
+                        <div class="col-sm-8">
+                            <input
+                                type="file"
+                                id="basic-default-message"
+                                class="form-control"
+                                name="Medical_Certificate"
+                                aria-describedby="basic-icon-default-message2"
+                            />
+                            @if($errors->has('Medical_Certificate'))
+                                <span class="alert alert-danger"> {{ $errors->first('Medical_Certificate') }}</span><br>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Website</label>
                         <div class="col-sm-8">
                             <input
@@ -324,7 +355,8 @@
                         <div class="col-sm-8">
                             <select name="licensecategories[]" class="selectpicker" multiple data-live-search="true">
                                 @foreach($licensecategories as $licensecat)
-                                    <option value="{{ $licensecat['id'] }}">{{ $licensecat['License_Category_Name'] }}</option>
+                                    <option value="{{ $licensecat['id'] }}">
+                                        {{ $licensecat['License_Category_Name'] }} - {{ $licensecat['License_Fee'] }}</option>
                                 @endforeach
                             </select><br>
                             @if($errors->has('licensecategories'))

@@ -3,21 +3,21 @@
         <!-- Basic Bootstrap Table -->
 
         <div class="container mt-5">
-{{--            <h2 class="mb-4">Complete Applicant Data</h2>--}}
-{{--            --}}{{--            <div class="card-body m-100 ">--}}
-{{--            --}}{{--                <div class="demo-inline-spacing">--}}
-{{--            --}}{{--                    <a href="/profile/update/{{ $users['id'] }}">--}}
-{{--            --}}{{--                        <button type="button" class="btn rounded-pill btn-primary">Update Profile</button>--}}
-{{--            --}}{{--                    </a>--}}
-{{--            --}}{{--                </div>--}}
-{{--            --}}{{--            </div>--}}
-{{--            --}}{{--            <div class="card-body m-100">--}}
-{{--            --}}{{--                <div class="demo-inline-spacing">--}}
-{{--            --}}{{--                    <a href="/profile/delete/{{ $users['id'] }}">--}}
-{{--            --}}{{--                        <button type="button" class="btn rounded-pill btn-primary">Delete Profile</button>--}}
-{{--            --}}{{--                    </a>--}}
-{{--            --}}{{--                </div>--}}
-{{--            --}}{{--            </div>--}}
+            {{--            <h2 class="mb-4">Complete Applicant Data</h2>--}}
+            {{--            --}}{{--            <div class="card-body m-100 ">--}}
+            {{--            --}}{{--                <div class="demo-inline-spacing">--}}
+            {{--            --}}{{--                    <a href="/profile/update/{{ $users['id'] }}">--}}
+            {{--            --}}{{--                        <button type="button" class="btn rounded-pill btn-primary">Update Profile</button>--}}
+            {{--            --}}{{--                    </a>--}}
+            {{--            --}}{{--                </div>--}}
+            {{--            --}}{{--            </div>--}}
+            {{--            --}}{{--            <div class="card-body m-100">--}}
+            {{--            --}}{{--                <div class="demo-inline-spacing">--}}
+            {{--            --}}{{--                    <a href="/profile/delete/{{ $users['id'] }}">--}}
+            {{--            --}}{{--                        <button type="button" class="btn rounded-pill btn-primary">Delete Profile</button>--}}
+            {{--            --}}{{--                    </a>--}}
+            {{--            --}}{{--                </div>--}}
+            {{--            --}}{{--            </div>--}}
             <table class="table table-bordered">
                 <tbody>
                 <tr>
@@ -79,15 +79,20 @@
                 <tr>
                     <th>Profile Image</th>
                     @if($personaldata)
-                        <td>{{ $personaldata->Profile_Image }}</td>
+                        <td>
+                            <img src="{{ asset($personaldata->Profile_Image) }}" alt="Profile Image">
+                        </td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
+
                 <tr>
-                    <th>CNIC Image</th>
+                    <th>Profile Image</th>
                     @if($personaldata)
-                        <td>{{ $personaldata->CNIC_Image }}</td>
+                        <td>
+                            <img src="{{ asset($personaldata->CNIC_Image) }}" alt="CNIC Image">
+                        </td>
                     @else
                         <td>Not Found</td>
                     @endif
@@ -97,7 +102,7 @@
                     @if($personaldata)
                         <td>
                             @if($personaldata->district)
-                                {{ $personaldata->district->name }}
+                                {{ $personaldata->district->District_Name }}
                             @else
                                 Not Found
                             @endif
@@ -108,8 +113,8 @@
                 </tr>
                 <tr>
                     <th>Business Name</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->alternate_mobile_no }}</td>
+                    @if($business)
+                        <td>{{ $business->Business_Name }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
@@ -117,58 +122,58 @@
 
                 <tr>
                     <th>Business Address</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->current_address }}</td>
+                    @if($business)
+                        <td>{{ $business->Business_Address }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
                 <tr>
                     <th>Contact Number</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->permanent_address }}</td>
+                    @if($business)
+                        <td>{{ $business->Contact_Number }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
                 <tr>
                     <th>Business Email</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->postal_code }}</td>
+                    @if($business)
+                        <td>{{ $business->Business_Email }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
                 <tr>
                     <th>Website</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->primary_contact }}</td>
+                    @if($business)
+                        <td>{{ $business->Website }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
                 <tr>
                     <th>Start Date</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->alternate_contact }}</td>
+                    @if($business)
+                        <td>{{ $business->Start_Date }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
                 <tr>
                     <th>Food Handlers</th>
-                    @if($businessdata)
-                        <td>{{ $businessdata->relationship }}</td>
+                    @if($business)
+                        <td>{{ $business->Food_Handlers }}</td>
                     @else
                         <td>Not Found</td>
                     @endif
                 </tr>
                 <tr>
                     <th>Business District</th>
-                    @if($businessdata)
+                    @if($business)
                         <td>
-                            @if($businessdata->district)
-                                {{ $businessdata->district->name }}
+                            @if($business->district)
+                                {{ $business->district->District_Name }}
                             @else
                                 Not Found
                             @endif
@@ -178,11 +183,11 @@
                     @endif
                 </tr>
                 <tr>
-                    <th>Business District</th>
-                    @if($businessdata)
+                    <th>Business Type</th>
+                    @if($business)
                         <td>
-                            @if($businessdata->business)
-                                {{ $businessdata->business->Business_Types }}
+                            @if($business->business)
+                                {{ $business->business->Business_Types }}
                             @else
                                 Not Found
                             @endif
@@ -193,18 +198,23 @@
                 </tr>
 {{--                <tr>--}}
 {{--                    <th>License Category</th>--}}
-{{--                    @if($account)--}}
-{{--                        <td>{{ $account->iban }}</td>--}}
+{{--                    @if($license)--}}
+{{--                        <td>--}}
+{{--                            @if($license->business)--}}
+{{--                                {{ $license->business->Business_Types }}--}}
+{{--                            @else--}}
+{{--                                Not Found--}}
+{{--                            @endif--}}
+{{--                        </td>--}}
 {{--                    @else--}}
 {{--                        <td>Not Found</td>--}}
 {{--                    @endif--}}
 {{--                </tr>--}}
+
                 </tbody>
             </table>
         </div>
     </div>
-
-
 
 
 </x-layouts.app>
